@@ -1,17 +1,21 @@
 package com.epam.jmp.entity;
 
-abstract public class Duck {
+public class Duck {
 
 	static {
 		id = 0;
 	}
 
 	private static int id;
-
+	
 	private String name;
 
-	private float stepMeasure;
+	private float stepMeasure = 1;
 
+	private int stepsQuantityDuckBecomesHungry = 10;
+	
+	private int counter = 0;
+	
 	public Duck() {
 		id++;
 	}
@@ -44,5 +48,21 @@ abstract public class Duck {
 	public void setStepMeasure(float stepMeasure) {
 		this.stepMeasure = stepMeasure;
 	}
+
+	public int getStepsQuantityDuckBecomesHungry() {
+		return stepsQuantityDuckBecomesHungry;
+	}
+
+	public void setStepsQuantityDuckBecomesHungry(int stepsQuantityDuckBecomesHungry) {
+		this.stepsQuantityDuckBecomesHungry = stepsQuantityDuckBecomesHungry;
+	}
+
+	public int getCounter() {
+		return counter;
+	}
+
+	public void setCounter(int counter) {
+		this.counter = counter;
+	}	
 
 }
