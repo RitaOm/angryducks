@@ -1,0 +1,39 @@
+package com.epam.jmp.client;
+
+import java.util.List;
+
+import com.epam.jmp.model.duck.Duck;
+
+public class ClientInterface {
+
+	public static void displayGameboard(List<Duck> players,
+			List<String> labyrinth) {
+		for (int i = 0; i < labyrinth.size(); i++) {
+			String str = labyrinth.get(i);
+			for (Duck duck : players) {
+				if (duck.getCoordinates().getY() == i) {
+					str = str.substring(0, duck.getCoordinates().getX())
+							+ duck.getName()
+							+ str.substring(duck.getCoordinates().getX() + 1);
+				}
+			}
+			System.out.println(str);
+		}
+	}
+
+	public static void displayDuckInfo(Duck duck) {
+		System.out.println("Duck " + duck.getName() + " : "
+				+ duck.getCoordinates());
+	}
+
+	public static void offerActions(List<String> actions) {
+	}
+	
+	public static String chooseAction(List<String> actions) {
+		return null;
+	}
+	
+	public static void concludeAction(ActionStatus result){
+		
+	}
+}

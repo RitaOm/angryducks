@@ -1,22 +1,23 @@
 package com.epam.jmp.util;
 
-import com.epam.jmp.entity.duck.Duck;
-import com.epam.jmp.entity.labyrinth.Coordinates;
-import com.epam.jmp.entity.labyrinth.Labyrinth;
+import java.util.List;
+
+import com.epam.jmp.model.duck.Duck;
+import com.epam.jmp.model.labyrinth.Coordinates;
+import com.epam.jmp.model.labyrinth.Labyrinth;
 
 public class CoordinatesOperations {
 
 	private CoordinatesOperations() {
 	}
 
-	public static Coordinates findLabyrinthPoint(Labyrinth labyrinth,
+	public static Coordinates findLabyrinthPoint(List<String> labyrinth,
 			String point) {
 		Coordinates coordinates = new Coordinates();
-		String symbol = LabyrinthPropertyManager.getProperty(point);
-		for (int i = 0; i < labyrinth.getLabyrinthInstance().size(); i++) {
-			if (labyrinth.getLabyrinthInstance().get(i).contains(symbol)) {
-				coordinates.setX(labyrinth.getLabyrinthInstance().get(i)
-						.indexOf(symbol));
+		String symbol = PropertyManager.getProperty(point);
+		for (int i = 0; i < labyrinth.size(); i++) {
+			if (labyrinth.get(i).contains(symbol)) {
+				coordinates.setX(labyrinth.get(i).indexOf(symbol));
 				coordinates.setY(i);
 			}
 		}
@@ -30,5 +31,11 @@ public class CoordinatesOperations {
 		}
 		return false;
 	}
+	
+	public static void copyCoordinates (Coordinates toBeCopied, Coordinates c2){
+		c2.setX(toBeCopied.getX());
+		c2.setY(toBeCopied.getY());
+	}
+
 
 }

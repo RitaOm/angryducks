@@ -1,22 +1,28 @@
 package com.epam.jmp.main;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import client.ClientAction;
 
 import com.epam.jmp.creator.AliveDuckCreator;
 import com.epam.jmp.creator.ToyDuckCreator;
-import com.epam.jmp.entity.duck.AliveDuck;
-import com.epam.jmp.entity.duck.ToyDuck;
-import com.epam.jmp.util.LabyrinthPropertyManager;
-import com.epam.jmp.util.TxtFileReader;
+import com.epam.jmp.model.duck.AliveDuck;
+import com.epam.jmp.model.duck.Duck;
+import com.epam.jmp.model.duck.ToyDuck;
+import com.epam.jmp.model.labyrinth.Coordinates;
+
 
 public class GameRunner {
 
 	public static void main(String[] args) {
 		AliveDuck ad = new AliveDuckCreator().createSimpleDuck();
+		ad.setCoordinates(new Coordinates(2, 3));
 		ToyDuck td = new ToyDuckCreator().createSimpleDuck();
-		List<String> lines = TxtFileReader.readLabyrinthFromTxtFile("src/level1/labyrinth.txt");
+		td.setCoordinates(new Coordinates(6, 4));
+		AliveDuck ad2 = new AliveDuckCreator().createSimpleDuck();
+		List<Duck> players = new ArrayList<Duck>();
+		players.add(ad);
+		players.add(td);
+		players.add(ad2);
 	}
 
 }
