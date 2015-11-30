@@ -1,6 +1,6 @@
 package com.epam.jmp.creator;
 
-import com.epam.jmp.entity.Duck;
+import com.epam.jmp.entity.duck.Duck;
 
 public abstract class AbstractDuckCreator<T extends Duck> {
 	

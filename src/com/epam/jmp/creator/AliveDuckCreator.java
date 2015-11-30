@@ -2,8 +2,8 @@ package com.epam.jmp.creator;
 
 import java.util.Random;
 
-import com.epam.jmp.entity.AliveDuck;
-import com.epam.jmp.util.DuckManager;
+import com.epam.jmp.entity.duck.AliveDuck;
+import com.epam.jmp.util.DuckUtil;
 
 public class AliveDuckCreator extends AbstractDuckCreator<AliveDuck> {
 
@@ -18,7 +18,7 @@ public class AliveDuckCreator extends AbstractDuckCreator<AliveDuck> {
 	@Override
 	public AliveDuck createSimpleDuck() {
 		AliveDuck duck = new AliveDuck();
-		String name = DuckManager.generateDuckNameFromId(duck.getId());
+		String name = DuckUtil.generateDuckNameFromId(duck.getId());
 		duck.setName(name);
 		Random random = new Random();
 		duck.setAvailableSnackQuantity(random.nextInt(MAX_SNACK_QUANTITY

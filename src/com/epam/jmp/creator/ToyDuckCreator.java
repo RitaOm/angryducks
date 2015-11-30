@@ -2,8 +2,8 @@ package com.epam.jmp.creator;
 
 import java.util.Random;
 
-import com.epam.jmp.entity.ToyDuck;
-import com.epam.jmp.util.DuckManager;
+import com.epam.jmp.entity.duck.ToyDuck;
+import com.epam.jmp.util.DuckUtil;
 
 public class ToyDuckCreator extends AbstractDuckCreator<ToyDuck>{
 	
@@ -14,7 +14,7 @@ public class ToyDuckCreator extends AbstractDuckCreator<ToyDuck>{
 	@Override
 	public ToyDuck createSimpleDuck() {
 		ToyDuck duck = new ToyDuck();
-		String name = DuckManager.generateDuckNameFromId(duck.getId());
+		String name = DuckUtil.generateDuckNameFromId(duck.getId());
 		duck.setName(name);
 		Random random = new Random();
 		duck.setAvailableBatteryQuantity(random.nextInt(MAX_BATTERY_QUANTITY

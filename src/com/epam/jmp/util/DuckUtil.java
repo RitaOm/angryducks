@@ -1,12 +1,12 @@
 package com.epam.jmp.util;
 
-public class DuckManager {
+public class DuckUtil {
 
 	public static int UNICODE_NUMBER_FIRST_LATIN_UPPERCASELETTER = 65;
 
 	public static String NAME_FOR_UNNAMED_DUCKS = "?";
 
-	private DuckManager() {
+	private DuckUtil() {
 	}
 
 	/*

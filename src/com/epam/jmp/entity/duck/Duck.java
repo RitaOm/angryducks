@@ -1,6 +1,8 @@
-package com.epam.jmp.entity;
+package com.epam.jmp.entity.duck;
 
-public class Duck {
+import com.epam.jmp.entity.labyrinth.LabyrinthWalker;
+
+public class Duck extends LabyrinthWalker{
 
 	static {
 		id = 0;

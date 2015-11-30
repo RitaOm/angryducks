@@ -1,4 +1,5 @@
-package com.epam.jmp.entity;
+package com.epam.jmp.entity.duck;
+
 
 public class ToyDuck extends Duck {
 	

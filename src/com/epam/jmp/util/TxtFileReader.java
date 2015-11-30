@@ -7,18 +7,18 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LabyrinthReader {
+public class TxtFileReader {
 
-	private LabyrinthReader() {
+	private TxtFileReader() {
 	}
 
-	public static List<String> readFromTxtFile(String filename) {
+	public static List<String> readLabyrinthFromTxtFile(String filename) {
 		List<String> lines = new ArrayList<String>();
 		try {
 			lines = Files.readAllLines(Paths.get(filename),
 					Charset.defaultCharset());
 		} catch (IOException e) {
-			System.out.println("An IO problem when reading " + filename + ". "
+			System.out.println("IO problem with " + filename + ": "
 					+ e.getMessage());
 		}
 		return lines;
