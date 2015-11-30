@@ -1,18 +1,20 @@
 package com.epam.jmp.main;
 
+import java.util.List;
+
 import com.epam.jmp.creator.AliveDuckCreator;
 import com.epam.jmp.creator.ToyDuckCreator;
 import com.epam.jmp.entity.AliveDuck;
-import com.epam.jmp.entity.Duck;
 import com.epam.jmp.entity.ToyDuck;
+import com.epam.jmp.util.LabyrinthReader;
 
 public class GameRunner {
 
 	public static void main(String[] args) {
-		AliveDuck ad = new AliveDuckCreator().createSimpleDuck();
-		System.out.println(ad.getId()+","+ad.getName()+","+ad.getAvailableDrinkQuantity()+","+ad.getAvailableSnackQuantity());
-		ToyDuck td = new ToyDuckCreator().createSimpleDuck();
-		System.out.println(td.getId()+","+td.getName()+","+td.getAvailableBatteryQuantity());
+		List<String> lines = LabyrinthReader.readFromTxtFile("src/labyrinth.txt");
+		for (String line : lines) {
+			System.out.println(line);
+		}
 	}
 
 }

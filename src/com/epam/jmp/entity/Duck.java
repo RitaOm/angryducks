@@ -7,15 +7,15 @@ public class Duck {
 	}
 
 	private static int id;
-	
+
 	private String name;
 
 	private float stepMeasure = 1;
 
 	private int stepsQuantityDuckBecomesHungry = 10;
-	
+
 	private int counter = 0;
-	
+
 	public Duck() {
 		id++;
 	}
@@ -53,7 +53,8 @@ public class Duck {
 		return stepsQuantityDuckBecomesHungry;
 	}
 
-	public void setStepsQuantityDuckBecomesHungry(int stepsQuantityDuckBecomesHungry) {
+	public void setStepsQuantityDuckBecomesHungry(
+			int stepsQuantityDuckBecomesHungry) {
 		this.stepsQuantityDuckBecomesHungry = stepsQuantityDuckBecomesHungry;
 	}
 
@@ -63,6 +64,31 @@ public class Duck {
 
 	public void setCounter(int counter) {
 		this.counter = counter;
-	}	
+	}
+
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		final Duck other = (Duck) obj;
+		if (this.getId() != other.getId()) {
+			return false;
+		}
+		if ((this.name == null) ? (other.name != null) : !this.name
+				.equals(other.name)) {
+			return false;
+		}
+		return true;
+	}
+
+	public int hashCode() {
+		final int PRIME = 31;
+		int result = 7;
+		result = PRIME * result + getId();
+		return result;
+	}
 
 }
