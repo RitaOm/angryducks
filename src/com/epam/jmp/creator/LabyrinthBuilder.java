@@ -1,9 +1,9 @@
 package com.epam.jmp.creator;
 
 import com.epam.jmp.model.GameLevel;
-import com.epam.jmp.model.labyrinth.Coordinates;
+import com.epam.jmp.model.labyrinth.Cell;
 import com.epam.jmp.model.labyrinth.Labyrinth;
-import com.epam.jmp.util.CoordinatesOperations;
+import com.epam.jmp.util.CellOperations;
 
 public abstract class LabyrinthBuilder {
 
@@ -21,9 +21,9 @@ public abstract class LabyrinthBuilder {
 	}
 	
 	public void addKeyPoints(Labyrinth labyrinth){
-		Coordinates entry = CoordinatesOperations.findLabyrinthPoint(labyrinth.getLabyrinthInstance(),
+		Cell entry = CellOperations.findLabyrinthPoint(labyrinth.getLabyrinthInstance(),
 				LabyrinthPoint.ENTRY.toString());
-		Coordinates exit = CoordinatesOperations.findLabyrinthPoint(labyrinth.getLabyrinthInstance(),
+		Cell exit = CellOperations.findLabyrinthPoint(labyrinth.getLabyrinthInstance(),
 				LabyrinthPoint.EXIT.toString());
 		labyrinth.setEntry(entry);
 		labyrinth.setExit(exit);

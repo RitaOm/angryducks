@@ -6,9 +6,9 @@ public class Labyrinth {
 
 	private List<String> labyrinthInstance;
 	
-	private Coordinates entry;
+	private Cell entry;
 	
-	private Coordinates exit;
+	private Cell exit;
 	
 	public Labyrinth(List<String> labyrinth) {
 		labyrinthInstance = labyrinth;
@@ -18,19 +18,19 @@ public class Labyrinth {
 		return labyrinthInstance;
 	}
 
-	public Coordinates getEntry() {
+	public Cell getEntry() {
 		return entry;
 	}
 
-	public Coordinates getExit() {
+	public Cell getExit() {
 		return exit;
 	}
 
-	public void setEntry(Coordinates entry) {
+	public void setEntry(Cell entry) {
 		this.entry = entry;
 	}
 
-	public void setExit(Coordinates exit) {
+	public void setExit(Cell exit) {
 		this.exit = exit;
 	}	
 	

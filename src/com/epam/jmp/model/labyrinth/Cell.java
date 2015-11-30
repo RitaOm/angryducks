@@ -1,7 +1,7 @@
 package com.epam.jmp.model.labyrinth;
 
-//A class which encapsulates data about position of duck on the labyrinth at this time
-public class Coordinates {
+//A class which encapsulates coordinates and content of one cell of labyrinth
+public class Cell {
 
 	//horizontal coordinate 
 	private int x;
@@ -9,11 +9,13 @@ public class Coordinates {
 	//vertical coordinate 	
 	private int y;
 	
-	public Coordinates(){
+	private char content;
+	
+	public Cell(){
 	}
 
 
-	public Coordinates(int x, int y) {
+	public Cell(int x, int y) {
 		super();
 		this.x = x;
 		this.y = y;
@@ -38,9 +40,18 @@ public class Coordinates {
 
 	@Override
 	public String toString() {
-		return "(" + x + ", " + y + ")";
+		return "(" + x + ", " + y + ") " + content;
 	}
-	
+
+
+	public char getContent() {
+		return content;
+	}
+
+
+	public void setContent(char content) {
+		this.content = content;
+	}
 	
 	
 }

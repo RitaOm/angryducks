@@ -9,7 +9,7 @@ import com.epam.jmp.creator.LabyrinthBuilder;
 import com.epam.jmp.creator.LabyrinthCreator;
 import com.epam.jmp.model.duck.Duck;
 import com.epam.jmp.model.labyrinth.Labyrinth;
-import com.epam.jmp.util.CoordinatesOperations;
+import com.epam.jmp.util.CellOperations;
 import com.epam.jmp.util.ActionUtil;
 
 public class Game {
@@ -32,8 +32,8 @@ public class Game {
 		LabyrinthBuilder builder = new FileLabyrinthBuilder();
 		labyrinth = LabyrinthCreator.newInstance(builder, level);
 		for (Duck duck : playingDucks) {
-			CoordinatesOperations.copyCoordinates(labyrinth.getEntry(),
-					duck.getCoordinates());
+			CellOperations.copyCellCoordinates(labyrinth.getEntry(),
+					duck.getCurrentCell());
 		}
 	}
 	
@@ -45,7 +45,7 @@ public class Game {
 				String action = ClientInterface.chooseAction(actions);// +choose
 				ActionStatus result = ActionUtil.executeAction(action);
 				ClientInterface.concludeAction(result);
-				if (CoordinatesOperations.ifFinish(duck, labyrinth)){
+				if (CellOperations.ifFinish(duck, labyrinth)){
 					playingDucks.remove(duck);
 					finishedDucks.add(duck);
 				}

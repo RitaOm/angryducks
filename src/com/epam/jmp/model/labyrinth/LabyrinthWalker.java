@@ -2,7 +2,7 @@ package com.epam.jmp.model.labyrinth;
 
 public class LabyrinthWalker {
 
-	private Coordinates coordinates;
+	private Cell currentCell;
 	
 	private WalkerStatus status;
 	
@@ -10,12 +10,12 @@ public class LabyrinthWalker {
 		status = WalkerStatus.ON_START;
 	}
 
-	public Coordinates getCoordinates() {
-		return coordinates;
+	public Cell getCurrentCell() {
+		return currentCell;
 	}
 
-	public void setCoordinates(Coordinates coordinates) {
-		this.coordinates = coordinates;
+	public void setCurrentCell(Cell currentCell) {
+		this.currentCell = currentCell;
 	}
 
 	public WalkerStatus getStatus() {
