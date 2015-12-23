@@ -3,17 +3,14 @@ package com.epam.jmp.model.labyrinth;
 //A class which encapsulates coordinates and content of one cell of labyrinth
 public class Cell {
 
-	//horizontal coordinate 
+	// horizontal coordinate
 	private int x;
-	
-	//vertical coordinate 	
-	private int y;
-	
-	private char content;
-	
-	public Cell(){
-	}
 
+	// vertical coordinate
+	private int y;
+
+	public Cell() {
+	}
 
 	public Cell(int x, int y) {
 		super();
@@ -37,21 +34,14 @@ public class Cell {
 		this.y = y;
 	}
 
+	public void changeCoordinates(int deltaX, int deltaY) {
+		x += deltaX;
+		y += deltaY;
+	}
 
 	@Override
 	public String toString() {
-		return "(" + x + ", " + y + ") " + content;
+		return " (" + x + ", " + y + ") ";
 	}
 
-
-	public char getContent() {
-		return content;
-	}
-
-
-	public void setContent(char content) {
-		this.content = content;
-	}
-	
-	
 }

@@ -1,21 +1,33 @@
 package com.epam.jmp.model.labyrinth;
 
-import java.util.List;
 
 public class Labyrinth {
 
-	private List<String> labyrinthInstance;
+	private final String[][] instance;
+	
+	private LabyrinthLevel level;
 	
 	private Cell entry;
 	
 	private Cell exit;
 	
-	public Labyrinth(List<String> labyrinth) {
-		labyrinthInstance = labyrinth;
+	private int rows;
+	
+	private int columns;
+	
+	public Labyrinth(String[][] labyrinth, LabyrinthLevel gameLevel) {
+		instance = labyrinth;
+		level = gameLevel;
+		rows = instance.length;
+		columns = instance[0].length;
 	}
 
-	public List<String> getLabyrinthInstance() {
-		return labyrinthInstance;
+	public String[][] getInstance() {
+		return instance;
+	}
+	
+	public LabyrinthLevel getLevel() {
+		return level;
 	}
 
 	public Cell getEntry() {
@@ -32,6 +44,22 @@ public class Labyrinth {
 
 	public void setExit(Cell exit) {
 		this.exit = exit;
+	}
+
+	public int getRows() {
+		return rows;
+	}
+
+	public void setRows(int rows) {
+		this.rows = rows;
+	}
+
+	public int getColumns() {
+		return columns;
+	}
+
+	public void setColumns(int columns) {
+		this.columns = columns;
 	}	
-	
+
 }

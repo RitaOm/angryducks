@@ -3,14 +3,12 @@ package com.epam.jmp.model;
 import java.util.List;
 
 import com.epam.jmp.client.ActionStatus;
+import com.epam.jmp.client.ActionUtil;
+import com.epam.jmp.client.ClientAction;
 import com.epam.jmp.client.ClientInterface;
-import com.epam.jmp.creator.FileLabyrinthBuilder;
-import com.epam.jmp.creator.LabyrinthBuilder;
-import com.epam.jmp.creator.LabyrinthCreator;
 import com.epam.jmp.model.duck.Duck;
 import com.epam.jmp.model.labyrinth.Labyrinth;
-import com.epam.jmp.util.CellOperations;
-import com.epam.jmp.util.ActionUtil;
+import com.epam.jmp.util.LabyrinthUtils;
 
 public class Game {
 
@@ -20,39 +18,58 @@ public class Game {
 
 	private List<Duck> finishedDucks;
 
-	private GameLevel level;
-
-	public Game(List<Duck> players, GameLevel level) {
+	public Game(List<Duck> players, Labyrinth labyrinth) {
 		playingDucks = players;
-		this.level = level;
+		this.labyrinth = labyrinth;
 		init();
 	}
 
 	private void init() {
-		LabyrinthBuilder builder = new FileLabyrinthBuilder();
-		labyrinth = LabyrinthCreator.newInstance(builder, level);
 		for (Duck duck : playingDucks) {
-			CellOperations.copyCellCoordinates(labyrinth.getEntry(),
+			LabyrinthUtils.copyCellCoordinates(labyrinth.getEntry(),
 					duck.getCurrentCell());
 		}
 	}
-	
-	public void play (){
-		while (playingDucks.size() > 0){
-			for (Duck duck : playingDucks){
-				List<String> actions = ActionUtil.getAvailableActions(duck);
+
+	public void play() {
+		while (playingDucks.size() > 0) {
+			for (Duck duck : playingDucks) {
+				List<String> actions = ActionUtil.getAvailableActions(duck,
+						labyrinth);
 				ClientInterface.offerActions(actions);
-				String action = ClientInterface.chooseAction(actions);// +choose
-				ActionStatus result = ActionUtil.executeAction(action);
-				ClientInterface.concludeAction(result);
-				if (CellOperations.ifFinish(duck, labyrinth)){
+				String action = ClientInterface.chooseAction();
+				ActionStatus result = ActionUtil.checkAction(action, actions);
+				ClientInterface.concludeAction(result, duck);
+				switch (result) {
+				case LEFT:
+					playingDucks.remove(duck);
+					continue;
+				case WRONG_ACTION:
+					continue;
+				case ACCEPTED:
+					ClientAction clientAction = ActionUtil.recognizeAction(action);
+					ActionUtil.executeAction(clientAction, duck);
+				}
+				if (LabyrinthUtils.isDuckFinished(duck, labyrinth)) {
 					playingDucks.remove(duck);
 					finishedDucks.add(duck);
+					// сообщение
 				}
-			}			
+			}
 		}
-		//ClientInterface finish - syso result
-		
+		ClientInterface.displayFinishStand(finishedDucks);
 	}
-	
+
+	public List<Duck> getPlayingDucks() {
+		return playingDucks;
+	}
+
+	public Labyrinth getLabyrinth() {
+		return labyrinth;
+	}
+
+	public List<Duck> getFinishedDucks() {
+		return finishedDucks;
+	}
+
 }

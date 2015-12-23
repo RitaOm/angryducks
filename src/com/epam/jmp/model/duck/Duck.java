@@ -1,38 +1,29 @@
 package com.epam.jmp.model.duck;
 
 import com.epam.jmp.model.labyrinth.LabyrinthWalker;
+import com.epam.jmp.util.Messages;
 
-public class Duck extends LabyrinthWalker{
-
-	static {
-		id = 0;
-	}
-
-	private static int id;
+public class Duck extends LabyrinthWalker {
 
 	private String name;
 
-	private float stepMeasure = 1;
+	private int stepMeasure = 1;
 
 	private int stepsQuantityDuckBecomesHungry = 10;
 
-	private int counter = 0;
+	private int counter = stepsQuantityDuckBecomesHungry;
 
 	public Duck() {
-		id++;
 	}
 
-	public void walk() {
-	}
-
-	public void swim() {
+	public void walk(int deltaX, int deltaY) {
+		move(deltaX, deltaY);
+		counter--;
+		System.out.println(Messages.getProperty("duck.walk", getName()));
 	}
 
 	public void quack() {
-	}
-
-	public int getId() {
-		return id;
+		System.out.println(Messages.getProperty("duck.quack", getName()));
 	}
 
 	public String getName() {
@@ -47,7 +38,7 @@ public class Duck extends LabyrinthWalker{
 		return stepMeasure;
 	}
 
-	public void setStepMeasure(float stepMeasure) {
+	public void setStepMeasure(int stepMeasure) {
 		this.stepMeasure = stepMeasure;
 	}
 
@@ -76,9 +67,6 @@ public class Duck extends LabyrinthWalker{
 			return false;
 		}
 		final Duck other = (Duck) obj;
-		if (this.getId() != other.getId()) {
-			return false;
-		}
 		if ((this.name == null) ? (other.name != null) : !this.name
 				.equals(other.name)) {
 			return false;
@@ -89,7 +77,7 @@ public class Duck extends LabyrinthWalker{
 	public int hashCode() {
 		final int PRIME = 31;
 		int result = 7;
-		result = PRIME * result + getId();
+		result = PRIME * result + name.hashCode();
 		return result;
 	}
 

@@ -1,4 +1,4 @@
-package com.epam.jmp.creator;
+package com.epam.jmp.creator.duck;
 
 import com.epam.jmp.model.duck.Duck;
 

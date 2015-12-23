@@ -2,7 +2,7 @@ package com.epam.jmp.client;
 
 public enum ClientAction {
 
-	WATER, SNACK, BATTERY, MONEY, UP, DOWN, LEFT, RIGHT, EXIT;
+	SNACK, BATTERY, MONEY, UP, DOWN, LEFT, RIGHT, EXIT;
 	
 	@Override
 	public String toString() {

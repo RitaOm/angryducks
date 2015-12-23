@@ -1,24 +1,32 @@
 package com.epam.jmp.util;
 
+import java.text.MessageFormat;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 
-public class PropertyManager {
+public class Messages {
 
 	private final static ResourceBundle resourceBundle = ResourceBundle
 			.getBundle(PathManager.PROPERTY_FILE_PATH);
 
-	private PropertyManager() {
+	private Messages() {
 	}
 
 	public static String getProperty(String key) {
 		try {
 			return resourceBundle.getString(key);
 		} catch (MissingResourceException e) {
-			// LOG.error(e.getMessage());
-			return null;
+			return '!' + key + '!';
 		}
 	}
+	
+	 public static String getProperty(String key, String param) {
+	        try {
+	            return MessageFormat.format(resourceBundle.getString(key), param);
+	        } catch (MissingResourceException e) {
+	            return '!' + key + '!';
+	        }
+	    }
 
 }

@@ -1,6 +1,6 @@
 package com.epam.jmp.util;
 
-import com.epam.jmp.model.GameLevel;
+import com.epam.jmp.model.labyrinth.LabyrinthLevel;
 
 public class PathManager {
 
@@ -11,7 +11,7 @@ public class PathManager {
 	private PathManager() {
 	}
 
-	public static String getPathToTxtFileWihLabyrinth(GameLevel level) {
+	public static String getPathToTxtFileWihLabyrinth(LabyrinthLevel level) {
 		return SRC_PATH + level + LABYRINTH_FILE_PATH;
 	}
 	
