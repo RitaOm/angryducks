@@ -1,62 +1,49 @@
 package com.epam.jmp.model.duck;
 
+import com.epam.jmp.model.labyrinth.Direction;
+import com.epam.jmp.model.labyrinth.Labyrinth;
 import com.epam.jmp.model.labyrinth.LabyrinthWalker;
-import com.epam.jmp.util.Messages;
 
-public class Duck extends LabyrinthWalker {
-
-	private String name;
-
-	private int stepMeasure = 1;
+public abstract class Duck extends LabyrinthWalker {
 
 	private int stepsQuantityDuckBecomesHungry = 10;
 
 	private int counter = stepsQuantityDuckBecomesHungry;
+	
+//	public void walk(int deltaX, int deltaY) {
+//		getCurrentCell().changeCoordinates(deltaX, deltaY);
+//		counter--;
+//		System.out.println(Messages.getProperty("duck.walk", name));
+//	}
+	
+	public Duck(String name) {
+		super(name);
+	}	
+	
+	public abstract void move(Labyrinth labyrinth, Direction direction);
 
-	public Duck() {
-	}
-
-	public void walk(int deltaX, int deltaY) {
-		move(deltaX, deltaY);
-		counter--;
-		System.out.println(Messages.getProperty("duck.walk", getName()));
-	}
-
-	public void quack() {
-		System.out.println(Messages.getProperty("duck.quack", getName()));
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public float getStepMeasure() {
-		return stepMeasure;
-	}
-
-	public void setStepMeasure(int stepMeasure) {
-		this.stepMeasure = stepMeasure;
-	}
-
+	public abstract void refresh();
+	
+	public abstract void superAbility();
+	
+	public abstract boolean hasReserve();
+	
+	public abstract DuckType getDuckType();
+	
 	public int getStepsQuantityDuckBecomesHungry() {
 		return stepsQuantityDuckBecomesHungry;
-	}
+	}	
 
-	public void setStepsQuantityDuckBecomesHungry(
-			int stepsQuantityDuckBecomesHungry) {
-		this.stepsQuantityDuckBecomesHungry = stepsQuantityDuckBecomesHungry;
+	public void makeAStep() {
+		counter--;
+	}
+	
+	public void setFullCounter () {
+		counter = stepsQuantityDuckBecomesHungry;
 	}
 
 	public int getCounter() {
 		return counter;
-	}
-
-	public void setCounter(int counter) {
-		this.counter = counter;
 	}
 
 	public boolean equals(Object obj) {
@@ -67,8 +54,8 @@ public class Duck extends LabyrinthWalker {
 			return false;
 		}
 		final Duck other = (Duck) obj;
-		if ((this.name == null) ? (other.name != null) : !this.name
-				.equals(other.name)) {
+		if ((this.getName() == null) ? (other.getName() != null) : !this.getName()
+				.equals(other.getName())) {
 			return false;
 		}
 		return true;
@@ -77,7 +64,7 @@ public class Duck extends LabyrinthWalker {
 	public int hashCode() {
 		final int PRIME = 31;
 		int result = 7;
-		result = PRIME * result + name.hashCode();
+		result = PRIME * result + getName().hashCode();
 		return result;
 	}
 

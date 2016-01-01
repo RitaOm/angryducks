@@ -1,8 +1,10 @@
 package com.epam.jmp.creator.labyrinth;
 
+import com.epam.jmp.builder.labyrinth.ILabyrinthBuilder;
+import com.epam.jmp.builder.labyrinth.NotRightLabyrinthException;
 import com.epam.jmp.model.labyrinth.Labyrinth;
 import com.epam.jmp.model.labyrinth.LabyrinthLevel;
-import com.epam.jmp.util.LabyrinthUtils;
+import com.epam.jmp.utils.LabyrinthUtils;
 
 public class LabyrinthCreator {
 

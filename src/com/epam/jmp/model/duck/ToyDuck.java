@@ -1,36 +1,53 @@
 package com.epam.jmp.model.duck;
 
-import com.epam.jmp.util.Messages;
+import com.epam.jmp.model.labyrinth.Direction;
+import com.epam.jmp.model.labyrinth.Labyrinth;
+import com.epam.jmp.utils.Messages;
 
 
 public class ToyDuck extends Duck {
 	
-	private static int STEP_MEASURE = 2;
 	private int availableBatteryQuantity;
 	
-	public ToyDuck() {
-		setStepMeasure(STEP_MEASURE);
+	public ToyDuck(String name, int availableBatteryQuantity) {
+		super(name);
+		this.availableBatteryQuantity = availableBatteryQuantity;
+	}
+
+	@Override
+	public void move(Labyrinth labyrinth, Direction direction) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void superAbility () {	
+		System.out.println(Messages.getProperty("duck.dance", getName()));
 	}
 	
-	public void fly(int deltaX, int deltaY) {
-		move(deltaX, deltaY);
-		int c = getCounter();
-		c--;
-		setCounter(c);
-		System.out.println(Messages.getProperty("duck.fly", getName()));
-	}
-	
-	public void chargeBattery () {	
+	@Override
+	public void refresh () {	
 		availableBatteryQuantity --;
 		System.out.println(Messages.getProperty("duck.charge", getName()));
 	}
+	
+	@Override
+	public boolean hasReserve(){
+		return availableBatteryQuantity>0;
+	}
+	
+	@Override
+	public DuckType getDuckType() {
+		return DuckType.TOY;
+	}
+
+	public void jump(int deltaX, int deltaY) {
+		getCurrentCell().changeCoordinates(deltaX, deltaY);
+		System.out.println(Messages.getProperty("duck.fly", getName()));
+	}	
 
 	public int getAvailableBatteryQuantity() {
 		return availableBatteryQuantity;
-	}
-
-	public void setAvailableBatteryQuantity(int availableBatteryQuantity) {
-		this.availableBatteryQuantity = availableBatteryQuantity;
 	}
 
 	@Override

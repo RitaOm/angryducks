@@ -1,4 +1,4 @@
-package com.epam.jmp.util;
+package com.epam.jmp.utils;
 
 import java.io.IOException;
 import java.nio.charset.Charset;

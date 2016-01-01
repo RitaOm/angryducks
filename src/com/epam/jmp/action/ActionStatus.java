@@ -1,4 +1,4 @@
-package com.epam.jmp.client;
+package com.epam.jmp.action;
 
 public enum ActionStatus {
 

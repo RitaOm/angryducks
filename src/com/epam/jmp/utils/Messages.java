@@ -1,4 +1,4 @@
-package com.epam.jmp.util;
+package com.epam.jmp.utils;
 
 import java.text.MessageFormat;
 import java.util.MissingResourceException;
@@ -21,9 +21,9 @@ public class Messages {
 		}
 	}
 	
-	 public static String getProperty(String key, String param) {
+	 public static String getProperty(String key, Object... params ) {
 	        try {
-	            return MessageFormat.format(resourceBundle.getString(key), param);
+	            return MessageFormat.format(resourceBundle.getString(key), params);
 	        } catch (MissingResourceException e) {
 	            return '!' + key + '!';
 	        }

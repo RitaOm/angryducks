@@ -1,6 +1,6 @@
-package com.epam.jmp.client;
+package com.epam.jmp.action;
 
-public enum ClientAction {
+public enum Action {
 
 	SNACK, BATTERY, MONEY, UP, DOWN, LEFT, RIGHT, EXIT;
 	

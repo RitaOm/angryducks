@@ -2,13 +2,15 @@ package com.epam.jmp.model;
 
 import java.util.List;
 
-import com.epam.jmp.client.ActionStatus;
-import com.epam.jmp.client.ActionUtil;
-import com.epam.jmp.client.ClientAction;
-import com.epam.jmp.client.ClientInterface;
+import com.epam.jmp.action.Action;
+import com.epam.jmp.action.ActionResult;
+import com.epam.jmp.action.ActionStatus;
+import com.epam.jmp.action.ActionUtil;
+import com.epam.jmp.client.PlayerInterface;
 import com.epam.jmp.model.duck.Duck;
 import com.epam.jmp.model.labyrinth.Labyrinth;
-import com.epam.jmp.util.LabyrinthUtils;
+import com.epam.jmp.model.labyrinth.WalkerStatus;
+import com.epam.jmp.utils.LabyrinthUtils;
 
 public class Game {
 
@@ -32,32 +34,39 @@ public class Game {
 	}
 
 	public void play() {
+		for (Duck duck : playingDucks) {
+			duck.setStatus(WalkerStatus.WALKING);
+		}
 		while (playingDucks.size() > 0) {
 			for (Duck duck : playingDucks) {
 				List<String> actions = ActionUtil.getAvailableActions(duck,
 						labyrinth);
-				ClientInterface.offerActions(actions);
-				String action = ClientInterface.chooseAction();
-				ActionStatus result = ActionUtil.checkAction(action, actions);
-				ClientInterface.concludeAction(result, duck);
-				switch (result) {
+				PlayerInterface.offerActions(actions);
+				String action = PlayerInterface.chooseAction();
+				ActionStatus status = ActionUtil.checkAction(action, actions);
+				PlayerInterface.concludeAction(status, duck);
+				switch (status) {
 				case LEFT:
 					playingDucks.remove(duck);
 					continue;
 				case WRONG_ACTION:
 					continue;
 				case ACCEPTED:
-					ClientAction clientAction = ActionUtil.recognizeAction(action);
-					ActionUtil.executeAction(clientAction, duck);
-				}
+					Action clientAction = ActionUtil.recognizeAction(action);
+					ActionResult result = ActionUtil.executeAction(clientAction, duck, labyrinth);
+					if (result == ActionResult.FAILURE){
+						//сообщение типа But smth came wrong..
+					}
+				}				
 				if (LabyrinthUtils.isDuckFinished(duck, labyrinth)) {
 					playingDucks.remove(duck);
+					duck.setStatus(WalkerStatus.FINISHED);
 					finishedDucks.add(duck);
 					// сообщение
 				}
 			}
 		}
-		ClientInterface.displayFinishStand(finishedDucks);
+		//PlayerInterface.displayFinishStand(finishedDucks);
 	}
 
 	public List<Duck> getPlayingDucks() {

@@ -3,13 +3,14 @@ package com.epam.jmp.client;
 import java.util.List;
 import java.util.Scanner;
 
-import com.epam.jmp.model.duck.Duck;
+import com.epam.jmp.action.ActionStatus;
 import com.epam.jmp.model.labyrinth.Labyrinth;
 import com.epam.jmp.model.labyrinth.LabyrinthLevel;
-import com.epam.jmp.util.LabyrinthUtils;
-import com.epam.jmp.util.Messages;
+import com.epam.jmp.model.labyrinth.LabyrinthWalker;
+import com.epam.jmp.utils.LabyrinthUtils;
+import com.epam.jmp.utils.Messages;
 
-public class ClientInterface {
+public class PlayerInterface {
 	
 	private static Scanner scanIn = new Scanner(System.in);
 
@@ -22,7 +23,7 @@ public class ClientInterface {
 	private static String DIVISION = "|";
 
 	public static int askForPlayersQuantity() {
-		System.out.println(Messages.getProperty("init.players.quantity"));
+		System.out.println(Messages.getProperty("init.ask.players.quantity"));
 		int quantity;
 		quantity = scanIn.nextInt();	
 		if (quantity > 26) {
@@ -32,20 +33,20 @@ public class ClientInterface {
 	}
 
 	public static LabyrinthLevel askForLabyrinthLevel() {
-		System.out.println(Messages.getProperty("init.game.level"));
+		System.out.println(Messages.getProperty("init.ask.game.level"));
 		int level;
 		level = scanIn.nextInt();
 		return LabyrinthUtils.initLabyrinthLevel(level);
 	}
 
-	public static void displayGameboard(List<Duck> players, Labyrinth labyrinth) {
+	public static void displayGameboard(List<? extends LabyrinthWalker> players, Labyrinth labyrinth) {
 		String[][] currentLabyrynth = labyrinth.getInstance();
 		for (int i = 0; i < labyrinth.getRows(); i++) {
 			for (int j = 0; j < labyrinth.getColumns(); j++) {
-				for (Duck duck : players) {
-					if (duck.getCurrentCell().getY() == i
-							&& duck.getCurrentCell().getX() == j) {
-						currentLabyrynth[i][j] = duck.getName();
+				for (LabyrinthWalker player : players) {
+					if (player.getCurrentCell().getY() == i
+							&& player.getCurrentCell().getX() == j) {
+						currentLabyrynth[i][j] = player.getName();
 					}
 				}
 				System.out.print(currentLabyrynth[i][j] + SPACE);
@@ -54,8 +55,12 @@ public class ClientInterface {
 		}
 	}
 
-	public static void displayPlayerInfo(Duck duck) {
-		System.out.println(duck.toString());
+	public static void displayPlayerInfo(LabyrinthWalker player) {
+		System.out.println(player.toString());
+	}
+	
+	public static void displayMessageWithPlayerName(LabyrinthWalker player, String key) {
+		System.out.println(Messages.getProperty(key, player.getName()));
 	}
 
 	public static void offerActions(List<String> actions) {
@@ -75,18 +80,23 @@ public class ClientInterface {
 		}
 		return letter.trim();
 	}
-
-	public static void congratulateFinishedPlayer(Duck duck) {
-		System.out.println(Messages.getProperty("congratulation.player.finished", duck.getName()));
+	
+	public static void displayPlayerBalance(LabyrinthWalker player) {
+		System.out.println(Messages.getProperty("player.balance", player.getBalance(), player.getCurrency()));
 	}
+	
 
-	public static void concludeAction(ActionStatus result, Duck duck) {
+	public static void concludeAction(ActionStatus result, LabyrinthWalker player) {
 		String key = result.toString() + ".conclude";
 		if (result == ActionStatus.LEFT) {
-			System.out.println(Messages.getProperty(key, duck.getName()));
+			System.out.println(Messages.getProperty(key, player.getName()));
 		} else {
 			System.out.println(Messages.getProperty(key));
 		}
+	}
+
+	public static void congratulateFinishedPlayer(LabyrinthWalker player) {
+		System.out.println(Messages.getProperty("congratulation.player.finished", player.getName()));
 	}
 
 	private static String createSpace(int number, int addSpace) {
@@ -109,7 +119,7 @@ public class ClientInterface {
 		return result;
 	}
 
-	public static void displayFinishStand(List<Duck> players) {
+	public static void displayFinishStand(List<LabyrinthWalker> players) {
 		int first = players.size() / 2;
 		int last = players.size() / 2;
 		System.out.println(createSpace(first, 1) + UNDERLINE

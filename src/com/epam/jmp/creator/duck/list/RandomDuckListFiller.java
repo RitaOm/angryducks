@@ -1,12 +1,14 @@
-package com.epam.jmp.creator.duck;
+package com.epam.jmp.creator.duck.list;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import com.epam.jmp.creator.duck.AliveDuckCreator;
+import com.epam.jmp.creator.duck.ToyDuckCreator;
 import com.epam.jmp.model.duck.Duck;
 
-public class RandomDuckListBuilder implements IDuckListBuilder {
+public class RandomDuckListFiller implements IDuckListFiller {
 
 	@Override
 	public List<Duck> buildDuckList(int quantity) {

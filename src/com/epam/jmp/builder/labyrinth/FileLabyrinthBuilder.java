@@ -1,12 +1,12 @@
-package com.epam.jmp.creator.labyrinth;
+package com.epam.jmp.builder.labyrinth;
 
 import java.util.List;
 
 import com.epam.jmp.model.labyrinth.Labyrinth;
 import com.epam.jmp.model.labyrinth.LabyrinthLevel;
-import com.epam.jmp.util.LabyrinthUtils;
-import com.epam.jmp.util.PathManager;
-import com.epam.jmp.util.TxtFileReader;
+import com.epam.jmp.utils.LabyrinthUtils;
+import com.epam.jmp.utils.PathManager;
+import com.epam.jmp.utils.TxtFileReader;
 
 public class FileLabyrinthBuilder implements ILabyrinthBuilder {
 

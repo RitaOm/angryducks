@@ -1,4 +1,4 @@
-package com.epam.jmp.creator.labyrinth;
+package com.epam.jmp.builder.labyrinth;
 
 public class NotRightLabyrinthException  extends Exception {
 

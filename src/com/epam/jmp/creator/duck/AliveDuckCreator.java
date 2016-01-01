@@ -8,16 +8,16 @@ public class AliveDuckCreator extends AbstractDuckCreator<AliveDuck> {
 
 	private static int MIN_SNACK_QUANTITY = 1;
 
-	private static int MAX_SNACK_QUANTITY = 5;
+	private static int MAX_SNACK_QUANTITY = 3;
 
 	@Override
 	public AliveDuck createSimpleDuck() {
-		AliveDuck duck = new AliveDuck();
-		duck.setName(DuckNameManager.generateDuckNameFromId());
+		String name = DuckNameManager.generateDuckNameFromId();
 		Random random = new Random();
-		duck.setAvailableSnackQuantity(random.nextInt(MAX_SNACK_QUANTITY
+		int availableSnackQuantity = random.nextInt(MAX_SNACK_QUANTITY
 				- MIN_SNACK_QUANTITY + 1)
-				+ MIN_SNACK_QUANTITY);
+				+ MIN_SNACK_QUANTITY;
+		AliveDuck duck = new AliveDuck(name, availableSnackQuantity);
 		return duck;
 	}
 }

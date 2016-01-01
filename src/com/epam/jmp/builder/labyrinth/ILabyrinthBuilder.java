@@ -1,4 +1,4 @@
-package com.epam.jmp.creator.labyrinth;
+package com.epam.jmp.builder.labyrinth;
 
 import com.epam.jmp.model.labyrinth.Labyrinth;
 import com.epam.jmp.model.labyrinth.LabyrinthLevel;
